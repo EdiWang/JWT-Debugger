@@ -52,8 +52,10 @@
                 <div class="decoded-section">
                     <div class="signature-section">
                         <div class="secret-input-container">
-                            <input type="text" id="secret-input" class="form-control code-font"
+                            <label for="secret-input" class="form-label">Enter the secret used to sign the JWT</label>
+                            <input type="text" name="secret-input" id="secret-input" class="form-control code-font"
                                    placeholder="your-256-bit-secret">
+
                             <div class="form-check mt-2">
                                 <input class="form-check-input" type="checkbox" id="secret-base64-encoded">
                                 <label class="form-check-label small" for="secret-base64-encoded">
