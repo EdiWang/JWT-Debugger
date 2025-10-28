@@ -1,3 +1,7 @@
+.site-title {
+    font-size: 1.5rem;
+}
+
 .code-font {
     font-family: 'Cascadia Mono', 'Consolas', 'Courier New', Courier, monospace;
 }
@@ -10,7 +14,7 @@
     border: none;
     outline: none;
     resize: vertical;
-    min-height: 200px;
+    min-height: 460px;
     padding: 1rem;
     font-size: 14px;
 }
@@ -46,18 +50,6 @@
     padding: 1rem;
     border-radius: 0 0 4px 4px;
 }
-
-.signature-formula {
-    background-color: white;
-    padding: 1rem;
-    border-radius: 4px;
-    margin-bottom: 1rem;
-    font-size: 13px;
-}
-
-    .signature-formula code {
-        color: #333;
-    }
 
 .secret-input-container {
     margin-bottom: 0.5rem;

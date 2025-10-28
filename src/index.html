@@ -12,7 +12,7 @@
 
 <body>
     <div class="container mt-3">
-        <h1 class="text-center mb-4">JSON Web Token (JWT) Debugger</h1>
+        <h1 class="text-center site-title mb-4">JSON Web Token (JWT) Debugger</h1>
 
         <p>
             Paste a JWT below that you'd like to decode, validate, and verify.
@@ -51,14 +51,6 @@
                 </h2>
                 <div class="decoded-section">
                     <div class="signature-section">
-                        <div class="signature-formula code-font">
-                            <code>
-                                HMACSHA256(<br>
-                                &nbsp;&nbsp;<span class="header-color">base64UrlEncode(header)</span> + "." +<br>
-                                &nbsp;&nbsp;<span class="payload-color">base64UrlEncode(payload)</span>,<br>
-                                &nbsp;&nbsp;<span id="secret-display">your-256-bit-secret</span>
-                            </code>
-                        </div>
                         <div class="secret-input-container">
                             <input type="text" id="secret-input" class="form-control code-font"
                                    placeholder="your-256-bit-secret" value="your-256-bit-secret">
