@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', function () {
         secretInput: elements.secretInput(),
         secretBase64Encoded: elements.secretBase64Encoded(),
         signatureStatus: elements.signatureStatus(),
+        copyJWTBtn: elements.copyJWTBtn(),
         clearJWTBtn: elements.clearJWTBtn()
     };
 

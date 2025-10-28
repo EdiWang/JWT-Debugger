@@ -6,5 +6,6 @@ export const elements = {
     secretInput: () => document.getElementById('secret-input'),
     secretBase64Encoded: () => document.getElementById('secret-base64-encoded'),
     signatureStatus: () => document.getElementById('signature-status'),
+    copyJWTBtn: () => document.getElementById('copy-jwt-btn'),
     clearJWTBtn: () => document.getElementById('clear-jwt-btn')
 };
