@@ -22,8 +22,9 @@
             <div class="col-6">
                 <h2 class="feature-subheader small">Encoded value</h2>
                 <div class="card">
-                    <div class="card-header">
-                        JSON Web Token (JWT)
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <span>JSON Web Token (JWT)</span>
+                        <button id="clear-jwt-btn" class="btn btn-sm btn-outline-secondary" type="button">Clear</button>
                     </div>
                     <div class="card-body jwt-card-body">
                         <textarea id="jwt-input" class="w-100 code-font" placeholder="Paste your JWT here..."></textarea>
@@ -34,14 +35,14 @@
             <div class="col-6">
                 <!-- Header Section -->
                 <h2 class="feature-subheader small">Decoded header</h2>
-                <div class="decoded-section">
+                <div class="decoded-section mb-4">
                     <pre id="header-output" class="decoded-output code-font header-bg"></pre>
                 </div>
 
 
                 <!-- Payload Section -->
                 <h2 class="feature-subheader small">Decoded payload</h2>
-                <div class="decoded-section">
+                <div class="decoded-section mb-4">
                     <pre id="payload-output" class="decoded-output payload-bg"></pre>
                 </div>
 

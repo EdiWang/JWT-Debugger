@@ -14,13 +14,13 @@ document.addEventListener('DOMContentLoaded', function () {
         if (jwt) {
             try {
                 const decoded = decodeJWT(jwt);
-                
+
                 // Display header
                 headerOutput.textContent = JSON.stringify(decoded.header, null, 2);
-                
+
                 // Display payload
                 payloadOutput.textContent = JSON.stringify(decoded.payload, null, 2);
-                
+
                 // Verify signature
                 verifyJWTSignature();
             } catch (error) {
@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
         try {
             const isValid = await verifySignature(jwt, secret, isBase64);
-            
+
             if (isValid) {
                 signatureStatus.innerHTML = `
                     <div class="alert alert-success mb-0" role="alert">
@@ -69,6 +69,17 @@ document.addEventListener('DOMContentLoaded', function () {
             `;
         }
     }
+
+    // Add clear button functionality
+    const clearJWTBtn = document.getElementById('clear-jwt-btn');
+    clearJWTBtn.addEventListener('click', function () {
+        jwtInput.value = '';
+        headerOutput.textContent = '';
+        payloadOutput.textContent = '';
+        signatureStatus.innerHTML = '';
+        secretInput.value = '';
+        secretBase64Encoded.checked = false;
+    });
 
     // Automatically revalidate signature when secret input changes
     secretInput.addEventListener('input', verifyJWTSignature);
