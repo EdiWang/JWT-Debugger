@@ -27,7 +27,10 @@
                         <button id="clear-jwt-btn" class="btn btn-sm btn-outline-secondary" type="button">Clear</button>
                     </div>
                     <div class="card-body jwt-card-body">
-                        <textarea id="jwt-input" class="w-100 code-font" placeholder="Paste your JWT here..."></textarea>
+                        <div class="jwt-input-wrapper">
+                            <textarea id="jwt-input" class="jwt-input-textarea code-font" placeholder="Paste your JWT here..."></textarea>
+                            <div id="jwt-highlighted" class="jwt-input-highlight code-font"></div>
+                        </div>
                     </div>
                 </div>
             </div>

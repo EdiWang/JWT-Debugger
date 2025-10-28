@@ -3,14 +3,48 @@ import { verifySignature } from './verifier.js';
 
 document.addEventListener('DOMContentLoaded', function () {
     const jwtInput = document.getElementById('jwt-input');
+    const jwtHighlighted = document.getElementById('jwt-highlighted');
     const headerOutput = document.getElementById('header-output');
     const payloadOutput = document.getElementById('payload-output');
     const secretInput = document.getElementById('secret-input');
     const secretBase64Encoded = document.getElementById('secret-base64-encoded');
     const signatureStatus = document.getElementById('signature-status');
 
+    function highlightJWT(jwt) {
+        if (!jwt) {
+            jwtHighlighted.innerHTML = '';
+            return;
+        }
+
+        const parts = jwt.split('.');
+        if (parts.length === 3) {
+            const highlighted = `<span class="jwt-part-header">${escapeHtml(parts[0])}</span><span class="jwt-part-dot">.</span><span class="jwt-part-payload">${escapeHtml(parts[1])}</span><span class="jwt-part-dot">.</span><span class="jwt-part-signature">${escapeHtml(parts[2])}</span>`;
+            jwtHighlighted.innerHTML = highlighted;
+        } else {
+            jwtHighlighted.textContent = jwt;
+        }
+    }
+
+    function escapeHtml(text) {
+        const map = {
+            '&': '&amp;',
+            '<': '&lt;',
+            '>': '&gt;',
+            '"': '&quot;',
+            "'": '&#039;'
+        };
+        return text.replace(/[&<>"']/g, m => map[m]);
+    }
+
+    function syncScroll() {
+        jwtHighlighted.scrollTop = jwtInput.scrollTop;
+        jwtHighlighted.scrollLeft = jwtInput.scrollLeft;
+    }
+
     function handleJWTDecode() {
         const jwt = jwtInput.value.trim();
+        highlightJWT(jwt);
+        
         if (jwt) {
             try {
                 const decoded = decodeJWT(jwt);
@@ -74,12 +108,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const clearJWTBtn = document.getElementById('clear-jwt-btn');
     clearJWTBtn.addEventListener('click', function () {
         jwtInput.value = '';
+        jwtHighlighted.innerHTML = '';
         headerOutput.textContent = '';
         payloadOutput.textContent = '';
         signatureStatus.innerHTML = '';
         secretInput.value = '';
         secretBase64Encoded.checked = false;
     });
+
+    // Sync scroll between textarea and highlight div
+    jwtInput.addEventListener('scroll', syncScroll);
 
     // Automatically revalidate signature when secret input changes
     secretInput.addEventListener('input', verifyJWTSignature);
