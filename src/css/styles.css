@@ -57,6 +57,16 @@ body {
     z-index: 1000;
 }
 
+.github-link {
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+    text-decoration: none;
+}
+
+    .github-link:hover {
+        color: var(--text-primary);
+    }
+
 /* Paragraph text */
 p {
     color: var(--text-primary);
