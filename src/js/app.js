@@ -87,5 +87,10 @@ document.addEventListener('DOMContentLoaded', function () {
     // Load default JWT
     const defaultJWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30';
     jwtInput.value = defaultJWT;
+
+    // Load default secret
+    const defaultSecret = 'a-string-secret-at-least-256-bits-long';
+    secretInput.value = defaultSecret;
+
     handleJWTDecode();
 });
