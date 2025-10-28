@@ -1,20 +1,90 @@
-.feature-subheader {
-    color: #6c757d;
-    margin-bottom: 10px;
-    text-transform: uppercase;
+.code-font {
+    font-family: 'Cascadia Mono', 'Consolas', 'Courier New', Courier, monospace;
 }
 
 .jwt-card-body {
-    height: 400px;
+    padding: 0;
 }
 
 #jwt-input {
-    border: 0 none;
-    font-family: 'Cascadia Mono', 'Consolas', 'Courier New', Courier, monospace;
+    border: none;
+    outline: none;
+    resize: vertical;
+    min-height: 200px;
+    padding: 1rem;
     font-size: 14px;
-    height: 100%;
 }
 
-#jwt-input:focus {
-    outline: none;
+.decoded-section {
+    margin-bottom: 1.5rem;
+}
+
+.decoded-output {
+    padding: 1rem;
+    margin: 0;
+    font-size: 14px;
+    border-radius: 0 0 4px 4px;
+    min-height: 80px;
+    overflow-x: auto;
+}
+
+.header-bg {
+    background-color: #fff5f8;
+}
+
+.payload-color {
+    color: #d63aff;
+    background-color: #fdf4ff;
+}
+
+.payload-bg {
+    background-color: #fdf4ff;
+}
+
+.signature-section {
+    background-color: #f0f9ff;
+    padding: 1rem;
+    border-radius: 0 0 4px 4px;
+}
+
+.signature-formula {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+    font-size: 13px;
+}
+
+    .signature-formula code {
+        color: #333;
+    }
+
+.secret-input-container {
+    margin-bottom: 0.5rem;
+}
+
+#secret-input {
+    font-size: 14px;
+}
+
+#secret-display {
+    color: #00b9f1;
+}
+
+.signature-status {
+    font-size: 14px;
+}
+
+    .signature-status .alert {
+        padding: 0.75rem;
+        font-size: 14px;
+    }
+
+.feature-subheader {
+    color: #6c757d;
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
 }

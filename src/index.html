@@ -26,14 +26,52 @@
                         JSON Web Token (JWT)
                     </div>
                     <div class="card-body jwt-card-body">
-                        <textarea id="jwt-input" class="w-100" placeholder="Paste your JWT here..."></textarea>
+                        <textarea id="jwt-input" class="w-100 code-font" placeholder="Paste your JWT here..."></textarea>
                     </div>
                 </div>
             </div>
 
             <div class="col-6">
-                <h2 class="feature-subheader small">Decoded value</h2>
-                <pre id="output-area" class="bg-light p-3"></pre>
+                <!-- Header Section -->
+                <h2 class="feature-subheader small">Decoded header</h2>
+                <div class="decoded-section">
+                    <pre id="header-output" class="decoded-output code-font header-bg"></pre>
+                </div>
+
+
+                <!-- Payload Section -->
+                <h2 class="feature-subheader small">Decoded payload</h2>
+                <div class="decoded-section">
+                    <pre id="payload-output" class="decoded-output payload-bg"></pre>
+                </div>
+
+                <!-- Signature Section -->
+                <h2 class="feature-subheader small">
+                    JWT Signature Verification (Optional)
+                </h2>
+                <div class="decoded-section">
+                    <div class="signature-section">
+                        <div class="signature-formula code-font">
+                            <code>
+                                HMACSHA256(<br>
+                                &nbsp;&nbsp;<span class="header-color">base64UrlEncode(header)</span> + "." +<br>
+                                &nbsp;&nbsp;<span class="payload-color">base64UrlEncode(payload)</span>,<br>
+                                &nbsp;&nbsp;<span id="secret-display">your-256-bit-secret</span>
+                            </code>
+                        </div>
+                        <div class="secret-input-container">
+                            <input type="text" id="secret-input" class="form-control code-font"
+                                   placeholder="your-256-bit-secret" value="your-256-bit-secret">
+                            <div class="form-check mt-2">
+                                <input class="form-check-input" type="checkbox" id="secret-base64-encoded">
+                                <label class="form-check-label small" for="secret-base64-encoded">
+                                    secret base64 encoded
+                                </label>
+                            </div>
+                        </div>
+                        <div id="signature-status" class="signature-status mt-3"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
