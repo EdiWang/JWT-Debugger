@@ -8,7 +8,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const secretInput = document.getElementById('secret-input');
     const secretBase64Encoded = document.getElementById('secret-base64-encoded');
     const signatureStatus = document.getElementById('signature-status');
-    const secretDisplay = document.getElementById('secret-display');
 
     function handleJWTDecode() {
         const jwt = jwtInput.value.trim();
@@ -36,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    function verifyJWTSignature() {
+    async function verifyJWTSignature() {
         const jwt = jwtInput.value.trim();
         const secret = secretInput.value;
         const isBase64 = secretBase64Encoded.checked;
@@ -47,7 +46,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
 
         try {
-            const isValid = verifySignature(jwt, secret, isBase64);
+            const isValid = await verifySignature(jwt, secret, isBase64);
             
             if (isValid) {
                 signatureStatus.innerHTML = `
@@ -71,11 +70,8 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
-    // Update secret display when typing
-    secretInput.addEventListener('input', function() {
-        secretDisplay.textContent = secretInput.value || 'your-256-bit-secret';
-        verifyJWTSignature();
-    });
+    // Automatically revalidate signature when secret input changes
+    secretInput.addEventListener('input', verifyJWTSignature);
 
     // Update verification when base64 checkbox changes
     secretBase64Encoded.addEventListener('change', verifyJWTSignature);
