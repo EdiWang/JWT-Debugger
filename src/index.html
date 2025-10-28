@@ -11,16 +11,31 @@
 </head>
 
 <body>
-    <div class="container">
-        <h1 class="mt-5 text-center">JSON Web Token (JWT) Debugger</h1>
-        
-        <div class="form-group">
-            <label for="jwtInput">Enter JWT:</label>
-            <textarea id="jwt-input" class="form-control" rows="3" placeholder="Paste your JWT here..."></textarea>
-        </div>
+    <div class="container mt-3">
+        <h1 class="text-center">JSON Web Token (JWT) Debugger</h1>
 
-        <h2 class="mt-4">Decoded JWT:</h2>
-        <pre id="output-area" class="bg-light p-3"></pre>
+        <p>
+            Paste a JWT below that you'd like to decode, validate, and verify.
+        </p>
+
+        <div class="row">
+            <div class="col-6">
+                <h2 class="feature-subheader small">Encoded value</h2>
+                <div class="card">
+                    <div class="card-header">
+                        JSON Web Token (JWT)
+                    </div>
+                    <div class="card-body">
+                        <textarea id="jwt-input" class="w-100" placeholder="Paste your JWT here..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <h2 class="feature-subheader small">Decoded value</h2>
+                <pre id="output-area" class="bg-light p-3"></pre>
+            </div>
+        </div>
     </div>
     <script src="js/app.js" type="module"></script>
 </body>
