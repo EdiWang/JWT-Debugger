@@ -4,9 +4,15 @@
     text-transform: uppercase;
 }
 
+.jwt-card-body {
+    height: 400px;
+}
+
 #jwt-input {
     border: 0 none;
     font-family: 'Cascadia Mono', 'Consolas', 'Courier New', Courier, monospace;
+    font-size: 14px;
+    height: 100%;
 }
 
 #jwt-input:focus {
