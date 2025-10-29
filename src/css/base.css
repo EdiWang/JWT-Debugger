@@ -1,0 +1,77 @@
+/* Global Styles */
+body {
+    background-color: var(--bg-primary);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+p {
+    color: var(--text-primary);
+}
+
+.site-title {
+    font-size: 1.5rem;
+    color: var(--text-primary);
+}
+
+.code-font {
+    font-family: 'Cascadia Mono', 'Consolas', 'Courier New', Courier, monospace;
+}
+
+.feature-subheader {
+    color: var(--text-secondary);
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    transition: color 0.3s ease;
+}
+
+.github-link {
+    color: var(--text-secondary);
+    transition: color 0.3s ease;
+    text-decoration: none;
+}
+
+.github-link:hover {
+    color: var(--text-primary);
+}
+
+/* Theme Toggle Button */
+#theme-toggle {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    z-index: 1000;
+    border-color: var(--btn-outline-color) !important;
+    color: var(--btn-outline-color) !important;
+    background-color: var(--card-bg) !important;
+    transition: all 0.3s ease;
+}
+
+#theme-toggle:hover {
+    background-color: var(--btn-outline-hover-bg) !important;
+    color: var(--btn-outline-hover-color) !important;
+    border-color: var(--btn-outline-color) !important;
+}
+
+/* Layout utilities */
+.row {
+    display: flex;
+}
+
+.row > .col-6 {
+    display: flex;
+    flex-direction: column;
+}
+
+.row > .col-6 > .card {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.row > .col-6 > .card > .card-body {
+    flex: 1;
+}
