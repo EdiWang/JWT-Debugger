@@ -20,65 +20,92 @@
     <div class="container mt-3">
         <h1 class="text-center site-title mb-4">JSON Web Token (JWT) Debugger</h1>
 
-        <p>
-            Paste a JWT below that you'd like to decode, validate, and verify.
-        </p>
+        <!-- Bootstrap Tabs Navigation -->
+        <ul class="nav nav-underline mb-3" id="jwtTabs" role="tablist">
+            <li class="nav-item" role="presentation">
+                <button class="nav-link active" id="decoder-tab" data-bs-toggle="tab" data-bs-target="#decoder-pane"
+                        type="button" role="tab" aria-controls="decoder-pane" aria-selected="true">
+                    JWT Decoder
+                </button>
+            </li>
+            <li class="nav-item" role="presentation">
+                <button class="nav-link" id="encoder-tab" data-bs-toggle="tab" data-bs-target="#encoder-pane"
+                        type="button" role="tab" aria-controls="encoder-pane" aria-selected="false">
+                    JWT Encoder
+                </button>
+            </li>
+        </ul>
 
-        <div class="row">
-            <div class="col-6">
-                <h2 class="feature-subheader small">Encoded value</h2>
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between align-items-center">
-                        <span>JSON Web Token (JWT)</span>
-                        <div>
-                            <button id="copy-jwt-btn" class="btn btn-sm btn-outline-secondary me-2" type="button">Copy</button>
-                            <button id="clear-jwt-btn" class="btn btn-sm btn-outline-secondary" type="button">Clear</button>
+        <!-- Tab Content -->
+        <div class="tab-content" id="jwtTabsContent">
+            <!-- JWT Decoder Tab -->
+            <div class="tab-pane fade show active" id="decoder-pane" role="tabpanel" aria-labelledby="decoder-tab" tabindex="0">
+                <p>
+                    Paste a JWT below that you'd like to decode, validate, and verify.
+                </p>
+
+                <div class="row">
+                    <div class="col-6">
+                        <h2 class="feature-subheader small">Encoded value</h2>
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <span>JSON Web Token (JWT)</span>
+                                <div>
+                                    <button id="copy-jwt-btn" class="btn btn-sm btn-outline-secondary me-2" type="button">Copy</button>
+                                    <button id="clear-jwt-btn" class="btn btn-sm btn-outline-secondary" type="button">Clear</button>
+                                </div>
+                            </div>
+                            <div class="card-body jwt-card-body">
+                                <div class="jwt-input-wrapper">
+                                    <textarea id="jwt-input" class="jwt-input-textarea code-font" placeholder="Paste your JWT here..."></textarea>
+                                    <div id="jwt-highlighted" class="jwt-input-highlight code-font"></div>
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="card-body jwt-card-body">
-                        <div class="jwt-input-wrapper">
-                            <textarea id="jwt-input" class="jwt-input-textarea code-font" placeholder="Paste your JWT here..."></textarea>
-                            <div id="jwt-highlighted" class="jwt-input-highlight code-font"></div>
+
+                    <div class="col-6">
+                        <!-- Header Section -->
+                        <h2 class="feature-subheader small">Decoded header</h2>
+                        <div class="decoded-section mb-4">
+                            <pre id="header-output" class="decoded-output code-font header-bg"></pre>
+                        </div>
+
+
+                        <!-- Payload Section -->
+                        <h2 class="feature-subheader small">Decoded payload</h2>
+                        <div class="decoded-section mb-4">
+                            <pre id="payload-output" class="decoded-output payload-bg"></pre>
+                        </div>
+
+                        <!-- Signature Section -->
+                        <h2 class="feature-subheader small">
+                            JWT Signature Verification (Optional)
+                        </h2>
+                        <div class="decoded-section">
+                            <div class="signature-section">
+                                <div class="secret-input-container">
+                                    <label for="secret-input" class="form-label">Enter the secret used to sign the JWT</label>
+                                    <input type="text" name="secret-input" id="secret-input" class="form-control code-font"
+                                           placeholder="your-256-bit-secret">
+
+                                    <div class="form-check mt-2">
+                                        <input class="form-check-input" type="checkbox" id="secret-base64-encoded">
+                                        <label class="form-check-label small" for="secret-base64-encoded">
+                                            secret base64 encoded
+                                        </label>
+                                    </div>
+                                </div>
+                                <div id="signature-status" class="signature-status mt-3"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
 
-            <div class="col-6">
-                <!-- Header Section -->
-                <h2 class="feature-subheader small">Decoded header</h2>
-                <div class="decoded-section mb-4">
-                    <pre id="header-output" class="decoded-output code-font header-bg"></pre>
-                </div>
-
-
-                <!-- Payload Section -->
-                <h2 class="feature-subheader small">Decoded payload</h2>
-                <div class="decoded-section mb-4">
-                    <pre id="payload-output" class="decoded-output payload-bg"></pre>
-                </div>
-
-                <!-- Signature Section -->
-                <h2 class="feature-subheader small">
-                    JWT Signature Verification (Optional)
-                </h2>
-                <div class="decoded-section">
-                    <div class="signature-section">
-                        <div class="secret-input-container">
-                            <label for="secret-input" class="form-label">Enter the secret used to sign the JWT</label>
-                            <input type="text" name="secret-input" id="secret-input" class="form-control code-font"
-                                   placeholder="your-256-bit-secret">
-
-                            <div class="form-check mt-2">
-                                <input class="form-check-input" type="checkbox" id="secret-base64-encoded">
-                                <label class="form-check-label small" for="secret-base64-encoded">
-                                    secret base64 encoded
-                                </label>
-                            </div>
-                        </div>
-                        <div id="signature-status" class="signature-status mt-3"></div>
-                    </div>
-                </div>
+            <!-- JWT Encoder Tab -->
+            <div class="tab-pane fade" id="encoder-pane" role="tabpanel" aria-labelledby="encoder-tab" tabindex="0">
+                <!-- Encoder content will be added here -->
             </div>
         </div>
 
