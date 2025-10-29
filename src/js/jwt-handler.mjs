@@ -1,5 +1,6 @@
 import { decodeJWT } from './decoder.mjs';
 import { highlightJWT } from './ui-helpers.mjs';
+import { highlightJSON } from './json-highlighter.mjs';
 
 export function handleJWTDecode(jwtInput, jwtHighlighted, headerOutput, payloadOutput, signatureStatus, verifyCallback) {
     const jwt = jwtInput.value.trim();
@@ -9,11 +10,13 @@ export function handleJWTDecode(jwtInput, jwtHighlighted, headerOutput, payloadO
         try {
             const decoded = decodeJWT(jwt);
 
-            // Display header
-            headerOutput.textContent = JSON.stringify(decoded.header, null, 2);
+            // Display header with syntax highlighting
+            const formattedHeader = JSON.stringify(decoded.header, null, 2);
+            headerOutput.innerHTML = highlightJSON(formattedHeader);
 
-            // Display payload
-            payloadOutput.textContent = JSON.stringify(decoded.payload, null, 2);
+            // Display payload with syntax highlighting
+            const formattedPayload = JSON.stringify(decoded.payload, null, 2);
+            payloadOutput.innerHTML = highlightJSON(formattedPayload);
 
             // Verify signature
             verifyCallback();
