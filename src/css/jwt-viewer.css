@@ -132,8 +132,7 @@
 }
 
 /* Encoder-specific fields */
-#encoder-payload,
-#encoder-secret {
+#encoder-payload {
     border: 0 none;
     font-size: 14px;
 }
