@@ -1,52 +1,45 @@
 import { syncScroll } from './ui-helpers.mjs';
 
-export function setupEventListeners(elements, handlers) {
-    const { jwtInput, jwtHighlighted, secretInput, secretBase64Encoded, copyJWTBtn, clearJWTBtn } = elements;
-    const { handleJWTDecode, verifyJWTSignature, clearAll } = handlers;
+export function setupEventListeners(domElements, handlers) {
+    // Decoder event listeners
+    domElements.jwtInput.addEventListener('input', handlers.handleJWTDecode);
+    domElements.jwtInput.addEventListener('scroll', () => syncScroll(domElements.jwtInput, domElements.jwtHighlighted));
+    domElements.secretInput.addEventListener('input', handlers.verifyJWTSignature);
+    domElements.secretBase64Encoded.addEventListener('change', handlers.verifyJWTSignature);
 
-    // Sync scroll between textarea and highlight div
-    jwtInput.addEventListener('scroll', () => syncScroll(jwtInput, jwtHighlighted));
-
-    // Automatically revalidate signature when secret input changes
-    secretInput.addEventListener('input', verifyJWTSignature);
-
-    // Update verification when base64 checkbox changes
-    secretBase64Encoded.addEventListener('change', verifyJWTSignature);
-
-    // Decode on paste
-    jwtInput.addEventListener('paste', function () {
-        setTimeout(handleJWTDecode, 0);
+    domElements.copyJWTBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(domElements.jwtInput.value);
     });
 
-    // Decode on input change
-    jwtInput.addEventListener('input', handleJWTDecode);
+    domElements.clearJWTBtn.addEventListener('click', handlers.clearAll);
 
-    // Copy button functionality
-    copyJWTBtn.addEventListener('click', async function () {
-        const jwtValue = jwtInput.value.trim();
-        if (jwtValue) {
-            try {
-                await navigator.clipboard.writeText(jwtValue);
-                // Visual feedback
-                const originalText = copyJWTBtn.textContent;
-                copyJWTBtn.textContent = 'Copied!';
-                copyJWTBtn.classList.add('btn-success');
-                copyJWTBtn.classList.remove('btn-outline-secondary');
-                
-                setTimeout(() => {
-                    copyJWTBtn.textContent = originalText;
-                    copyJWTBtn.classList.remove('btn-success');
-                    copyJWTBtn.classList.add('btn-outline-secondary');
-                }, 2000);
-            } catch (err) {
-                console.error('Failed to copy JWT:', err);
-                // Fallback for older browsers
-                jwtInput.select();
-                document.execCommand('copy');
-            }
-        }
+    // Encoder event listeners
+    domElements.encoderAlgorithm.addEventListener('change', handlers.handleJWTEncode);
+    domElements.encoderPayload.addEventListener('input', handlers.handleJWTEncode);
+    domElements.encoderSecret.addEventListener('input', handlers.handleJWTEncode);
+    domElements.encoderSecretBase64.addEventListener('change', handlers.handleJWTEncode);
+
+    domElements.generatedJwtOutput.addEventListener('scroll', () =>
+        syncScroll(domElements.generatedJwtOutput, domElements.generatedJwtHighlighted)
+    );
+
+    domElements.copyGeneratedJwtBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(domElements.generatedJwtOutput.value);
     });
 
-    // Clear button functionality
-    clearJWTBtn.addEventListener('click', clearAll);
+    domElements.clearEncoderHeaderBtn.addEventListener('click', () => {
+        domElements.encoderAlgorithm.value = 'HS256';
+        handlers.handleJWTEncode();
+    });
+
+    domElements.clearEncoderPayloadBtn.addEventListener('click', () => {
+        domElements.encoderPayload.value = '';
+        handlers.handleJWTEncode();
+    });
+
+    domElements.clearEncoderSecretBtn.addEventListener('click', () => {
+        domElements.encoderSecret.value = '';
+        domElements.encoderSecretBase64.checked = false;
+        handlers.handleJWTEncode();
+    });
 }

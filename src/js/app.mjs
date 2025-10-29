@@ -1,11 +1,13 @@
 import { elements } from './dom-elements.mjs';
 import { handleJWTDecode } from './jwt-handler.mjs';
+import { handleJWTEncode } from './encoder-handler.mjs';
 import { verifyJWTSignature } from './signature-handler.mjs';
 import { setupEventListeners } from './event-handlers.mjs';
 
 document.addEventListener('DOMContentLoaded', function () {
     // Get all DOM elements
     const domElements = {
+        // Decoder elements
         jwtInput: elements.jwtInput(),
         jwtHighlighted: elements.jwtHighlighted(),
         headerOutput: elements.headerOutput(),
@@ -14,10 +16,23 @@ document.addEventListener('DOMContentLoaded', function () {
         secretBase64Encoded: elements.secretBase64Encoded(),
         signatureStatus: elements.signatureStatus(),
         copyJWTBtn: elements.copyJWTBtn(),
-        clearJWTBtn: elements.clearJWTBtn()
+        clearJWTBtn: elements.clearJWTBtn(),
+
+        // Encoder elements
+        encoderAlgorithm: elements.encoderAlgorithm(),
+        encoderType: elements.encoderType(),
+        encoderPayload: elements.encoderPayload(),
+        encoderSecret: elements.encoderSecret(),
+        encoderSecretBase64: elements.encoderSecretBase64(),
+        generatedJwtOutput: elements.generatedJwtOutput(),
+        generatedJwtHighlighted: elements.generatedJwtHighlighted(),
+        copyGeneratedJwtBtn: elements.copyGeneratedJwtBtn(),
+        clearEncoderHeaderBtn: elements.clearEncoderHeaderBtn(),
+        clearEncoderPayloadBtn: elements.clearEncoderPayloadBtn(),
+        clearEncoderSecretBtn: elements.clearEncoderSecretBtn()
     };
 
-    // Create bound handler functions
+    // Create bound handler functions for decoder
     const boundHandleJWTDecode = () => handleJWTDecode(
         domElements.jwtInput,
         domElements.jwtHighlighted,
@@ -44,21 +59,45 @@ document.addEventListener('DOMContentLoaded', function () {
         domElements.secretBase64Encoded.checked = false;
     };
 
+    // Create bound handler function for encoder
+    const boundHandleJWTEncode = () => handleJWTEncode(
+        domElements.encoderAlgorithm,
+        domElements.encoderPayload,
+        domElements.encoderSecret,
+        domElements.encoderSecretBase64,
+        domElements.generatedJwtOutput,
+        domElements.generatedJwtHighlighted
+    );
+
     // Setup all event listeners
     setupEventListeners(domElements, {
         handleJWTDecode: boundHandleJWTDecode,
         verifyJWTSignature: boundVerifyJWTSignature,
-        clearAll
+        clearAll,
+        handleJWTEncode: boundHandleJWTEncode
     });
 
-    // Load default JWT
+    // Load default JWT for decoder
     const defaultJWT = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6IkpvaG4gRG9lIiwiYWRtaW4iOnRydWUsImlhdCI6MTUxNjIzOTAyMn0.KMUFsIDTnFmyG3nMiGM6H9FNFUROf3wh7SmqJp-QV30';
     domElements.jwtInput.value = defaultJWT;
 
-    // Load default secret
+    // Load default secret for decoder
     const defaultSecret = 'a-string-secret-at-least-256-bits-long';
     domElements.secretInput.value = defaultSecret;
 
     // Initial decode
     boundHandleJWTDecode();
+
+    // Load default values for encoder
+    const defaultPayload = JSON.stringify({
+        sub: "1234567890",
+        name: "John Doe",
+        admin: true,
+        iat: 1516239022
+    }, null, 2);
+    domElements.encoderPayload.value = defaultPayload;
+    domElements.encoderSecret.value = defaultSecret;
+
+    // Initial encode
+    boundHandleJWTEncode();
 });

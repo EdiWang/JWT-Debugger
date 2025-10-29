@@ -115,11 +115,22 @@
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <span>Header: Algorithm &amp; Token Type</span>
                                 <div>
-                                    <button id="clear-jwt-header" class="btn btn-sm btn-outline-secondary" type="button">Clear</button>
+                                    <button id="clear-encoder-header-btn" class="btn btn-sm btn-outline-secondary" type="button">Clear</button>
                                 </div>
                             </div>
                             <div class="card-body">
-
+                                <div class="mb-3">
+                                    <label for="encoder-algorithm" class="form-label">Algorithm</label>
+                                    <select id="encoder-algorithm" class="form-select code-font">
+                                        <option value="HS256" selected>HS256</option>
+                                        <option value="HS384">HS384</option>
+                                        <option value="HS512">HS512</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="encoder-type" class="form-label">Type</label>
+                                    <input type="text" id="encoder-type" class="form-control code-font" value="JWT" readonly>
+                                </div>
                             </div>
                         </div>
 
@@ -127,11 +138,12 @@
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <span>Payload: Data</span>
                                 <div>
-                                    <button id="clear-jwt-payload" class="btn btn-sm btn-outline-secondary" type="button">Clear</button>
+                                    <button id="clear-encoder-payload-btn" class="btn btn-sm btn-outline-secondary" type="button">Clear</button>
                                 </div>
                             </div>
                             <div class="card-body">
-
+                                <textarea id="encoder-payload" class="form-control code-font" rows="10" placeholder='{"sub": "1234567890", "name": "John Doe", "iat": 1516239022}'></textarea>
+                                <div class="form-text small">Enter valid JSON payload data</div>
                             </div>
                         </div>
 
@@ -139,11 +151,18 @@
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <span>Sign JWT: Secret</span>
                                 <div>
-                                    <button id="clear-jwt-payload" class="btn btn-sm btn-outline-secondary" type="button">Clear</button>
+                                    <button id="clear-encoder-secret-btn" class="btn btn-sm btn-outline-secondary" type="button">Clear</button>
                                 </div>
                             </div>
                             <div class="card-body">
-
+                                <label for="encoder-secret" class="form-label">Secret Key</label>
+                                <input type="text" id="encoder-secret" class="form-control code-font" placeholder="your-256-bit-secret">
+                                <div class="form-check mt-2">
+                                    <input class="form-check-input" type="checkbox" id="encoder-secret-base64">
+                                    <label class="form-check-label small" for="encoder-secret-base64">
+                                        secret base64 encoded
+                                    </label>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -155,8 +174,11 @@
                                     <button id="copy-generated-jwt-btn" class="btn btn-sm btn-outline-secondary" type="button">Copy</button>
                                 </div>
                             </div>
-                            <div class="card-body">
-
+                            <div class="card-body jwt-card-body">
+                                <div class="jwt-input-wrapper">
+                                    <textarea id="generated-jwt-output" class="jwt-input-textarea code-font" readonly placeholder="Your generated JWT will appear here..."></textarea>
+                                    <div id="generated-jwt-highlighted" class="jwt-input-highlight code-font"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
