@@ -13,6 +13,7 @@ export const elements = {
     // Encoder elements
     encoderAlgorithm: () => document.getElementById('encoder-algorithm'),
     encoderPayload: () => document.getElementById('encoder-payload'),
+    encoderPayloadHighlighted: () => document.getElementById('encoder-payload-highlighted'),
     encoderSecret: () => document.getElementById('encoder-secret'),
     encoderSecretBase64: () => document.getElementById('encoder-secret-base64'),
     generatedJwtOutput: () => document.getElementById('generated-jwt-output'),

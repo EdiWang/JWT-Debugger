@@ -59,6 +59,63 @@
     background-color: var(--input-bg);
 }
 
+/* JSON Editor with Highlighting */
+.json-editor-wrapper {
+    position: relative;
+    min-height: 200px;
+    background-color: var(--input-bg);
+    border: 1px solid var(--input-border);
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.json-editor-textarea,
+.json-editor-highlight {
+    margin: 0;
+    padding: 0.75rem;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: 0;
+    white-space: pre;
+    overflow-wrap: normal;
+    word-wrap: normal;
+    tab-size: 2;
+}
+
+.json-editor-textarea {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    resize: vertical;
+    color: transparent;
+    caret-color: var(--caret-color);
+    background: transparent;
+    z-index: 2;
+    overflow: auto;
+}
+
+.json-editor-textarea::placeholder {
+    color: var(--input-placeholder);
+    opacity: 0.5;
+}
+
+.json-editor-highlight {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    pointer-events: none;
+    z-index: 1;
+    background-color: var(--input-bg);
+    color: var(--text-primary);
+}
+
 /* Decoded Output Sections */
 .decoded-output {
     padding: 1rem;
@@ -135,4 +192,18 @@
 #encoder-payload {
     border: 0 none;
     font-size: 14px;
+}
+
+#encoder-secret {
+    font-size: 14px;
+    background-color: var(--input-bg) !important;
+    color: var(--input-text) !important;
+    border-color: var(--input-border) !important;
+}
+
+#encoder-secret:focus {
+    background-color: var(--input-bg) !important;
+    color: var(--input-text) !important;
+    border-color: #0d6efd !important;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 }

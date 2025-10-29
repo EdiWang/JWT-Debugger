@@ -3,6 +3,7 @@ import { handleJWTDecode } from './jwt-handler.mjs';
 import { handleJWTEncode } from './encoder-handler.mjs';
 import { verifyJWTSignature } from './signature-handler.mjs';
 import { setupEventListeners } from './event-handlers.mjs';
+import { initJSONEditor } from './json-editor.mjs';
 
 document.addEventListener('DOMContentLoaded', function () {
     // Get all DOM elements
@@ -21,6 +22,7 @@ document.addEventListener('DOMContentLoaded', function () {
         // Encoder elements
         encoderAlgorithm: elements.encoderAlgorithm(),
         encoderPayload: elements.encoderPayload(),
+        encoderPayloadHighlighted: elements.encoderPayloadHighlighted(),
         encoderSecret: elements.encoderSecret(),
         encoderSecretBase64: elements.encoderSecretBase64(),
         generatedJwtOutput: elements.generatedJwtOutput(),
@@ -67,6 +69,24 @@ document.addEventListener('DOMContentLoaded', function () {
         domElements.generatedJwtHighlighted
     );
 
+    // Load default values for encoder BEFORE initializing the editor
+    const defaultSecret = 'a-string-secret-at-least-256-bits-long';
+    const defaultPayload = JSON.stringify({
+        sub: "1234567890",
+        name: "John Doe",
+        admin: true,
+        iat: 1516239022
+    }, null, 2);
+    domElements.encoderPayload.value = defaultPayload;
+    domElements.encoderSecret.value = defaultSecret;
+
+    // Initialize JSON editor for encoder payload (will highlight the default value)
+    initJSONEditor(
+        domElements.encoderPayload,
+        domElements.encoderPayloadHighlighted,
+        boundHandleJWTEncode
+    );
+
     // Setup all event listeners
     setupEventListeners(domElements, {
         handleJWTDecode: boundHandleJWTDecode,
@@ -80,21 +100,10 @@ document.addEventListener('DOMContentLoaded', function () {
     domElements.jwtInput.value = defaultJWT;
 
     // Load default secret for decoder
-    const defaultSecret = 'a-string-secret-at-least-256-bits-long';
     domElements.secretInput.value = defaultSecret;
 
     // Initial decode
     boundHandleJWTDecode();
-
-    // Load default values for encoder
-    const defaultPayload = JSON.stringify({
-        sub: "1234567890",
-        name: "John Doe",
-        admin: true,
-        iat: 1516239022
-    }, null, 2);
-    domElements.encoderPayload.value = defaultPayload;
-    domElements.encoderSecret.value = defaultSecret;
 
     // Initial encode
     boundHandleJWTEncode();
