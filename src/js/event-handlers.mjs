@@ -27,11 +27,6 @@ export function setupEventListeners(domElements, handlers) {
         navigator.clipboard.writeText(domElements.generatedJwtOutput.value);
     });
 
-    domElements.clearEncoderHeaderBtn.addEventListener('click', () => {
-        domElements.encoderAlgorithm.value = 'HS256';
-        handlers.handleJWTEncode();
-    });
-
     domElements.clearEncoderPayloadBtn.addEventListener('click', () => {
         domElements.encoderPayload.value = '';
         handlers.handleJWTEncode();

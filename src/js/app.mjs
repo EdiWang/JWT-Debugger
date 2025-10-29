@@ -20,14 +20,12 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Encoder elements
         encoderAlgorithm: elements.encoderAlgorithm(),
-        encoderType: elements.encoderType(),
         encoderPayload: elements.encoderPayload(),
         encoderSecret: elements.encoderSecret(),
         encoderSecretBase64: elements.encoderSecretBase64(),
         generatedJwtOutput: elements.generatedJwtOutput(),
         generatedJwtHighlighted: elements.generatedJwtHighlighted(),
         copyGeneratedJwtBtn: elements.copyGeneratedJwtBtn(),
-        clearEncoderHeaderBtn: elements.clearEncoderHeaderBtn(),
         clearEncoderPayloadBtn: elements.clearEncoderPayloadBtn(),
         clearEncoderSecretBtn: elements.clearEncoderSecretBtn()
     };

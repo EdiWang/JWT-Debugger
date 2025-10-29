@@ -12,14 +12,12 @@ export const elements = {
 
     // Encoder elements
     encoderAlgorithm: () => document.getElementById('encoder-algorithm'),
-    encoderType: () => document.getElementById('encoder-type'),
     encoderPayload: () => document.getElementById('encoder-payload'),
     encoderSecret: () => document.getElementById('encoder-secret'),
     encoderSecretBase64: () => document.getElementById('encoder-secret-base64'),
     generatedJwtOutput: () => document.getElementById('generated-jwt-output'),
     generatedJwtHighlighted: () => document.getElementById('generated-jwt-highlighted'),
     copyGeneratedJwtBtn: () => document.getElementById('copy-generated-jwt-btn'),
-    clearEncoderHeaderBtn: () => document.getElementById('clear-encoder-header-btn'),
     clearEncoderPayloadBtn: () => document.getElementById('clear-encoder-payload-btn'),
     clearEncoderSecretBtn: () => document.getElementById('clear-encoder-secret-btn')
 };
