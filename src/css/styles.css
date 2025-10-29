@@ -341,3 +341,9 @@ p {
             .row > .col-6 > .card > .card-body {
                 flex: 1;
             }
+
+#encoder-payload,
+#encoder-secret {
+    border: 0 none;
+    font-size: 14px;
+}
