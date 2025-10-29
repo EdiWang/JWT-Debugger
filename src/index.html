@@ -105,7 +105,62 @@
 
             <!-- JWT Encoder Tab -->
             <div class="tab-pane fade" id="encoder-pane" role="tabpanel" aria-labelledby="encoder-tab" tabindex="0">
-                <!-- Encoder content will be added here -->
+                <p>
+                    Fill in the fields below to generate a signed JWT.
+                </p>
+
+                <div class="row">
+                    <div class="col-6">
+                        <div class="card mb-3">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <span>Header: Algorithm &amp; Token Type</span>
+                                <div>
+                                    <button id="clear-jwt-header" class="btn btn-sm btn-outline-secondary" type="button">Clear</button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+
+                            </div>
+                        </div>
+
+                        <div class="card mb-3">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <span>Payload: Data</span>
+                                <div>
+                                    <button id="clear-jwt-payload" class="btn btn-sm btn-outline-secondary" type="button">Clear</button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+
+                            </div>
+                        </div>
+
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <span>Sign JWT: Secret</span>
+                                <div>
+                                    <button id="clear-jwt-payload" class="btn btn-sm btn-outline-secondary" type="button">Clear</button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-6">
+                        <div class="card">
+                            <div class="card-header d-flex justify-content-between align-items-center">
+                                <span>JSON Web Token</span>
+                                <div>
+                                    <button id="copy-generated-jwt-btn" class="btn btn-sm btn-outline-secondary" type="button">Copy</button>
+                                </div>
+                            </div>
+                            <div class="card-body">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
 
