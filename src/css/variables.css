@@ -1,0 +1,44 @@
+/* Theme Variables */
+:root {
+    --bg-primary: #ffffff;
+    --bg-secondary: #f8f9fa;
+    --text-primary: #000000;
+    --text-secondary: #6c757d;
+    --border-color: #dee2e6;
+    --card-bg: #ffffff;
+    --card-header-bg: #f8f9fa;
+    --card-border: #dee2e6;
+    --input-bg: #ffffff;
+    --input-text: #000000;
+    --input-border: #ced4da;
+    --input-placeholder: #6c757d;
+    --header-highlight-bg: #fff5f8;
+    --payload-highlight-bg: #fdf4ff;
+    --signature-highlight-bg: #f0f9ff;
+    --caret-color: #000000;
+    --btn-outline-color: #6c757d;
+    --btn-outline-hover-bg: #6c757d;
+    --btn-outline-hover-color: #ffffff;
+}
+
+[data-theme="dark"] {
+    --bg-primary: #1a1a1a;
+    --bg-secondary: #2d2d2d;
+    --text-primary: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --border-color: #404040;
+    --card-bg: #2d2d2d;
+    --card-header-bg: #252525;
+    --card-border: #404040;
+    --input-bg: #1a1a1a;
+    --input-text: #e0e0e0;
+    --input-border: #404040;
+    --input-placeholder: #707070;
+    --header-highlight-bg: #3d1f2a;
+    --payload-highlight-bg: #3a2847;
+    --signature-highlight-bg: #1f3340;
+    --caret-color: #ffffff;
+    --btn-outline-color: #a0a0a0;
+    --btn-outline-hover-bg: #404040;
+    --btn-outline-hover-color: #ffffff;
+}

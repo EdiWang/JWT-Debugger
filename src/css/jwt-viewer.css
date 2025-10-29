@@ -1,0 +1,139 @@
+/* JWT Card Body */
+.jwt-card-body {
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--card-bg);
+}
+
+/* JWT Input with Highlighting */
+.jwt-input-wrapper {
+    position: relative;
+    flex: 1;
+    min-height: 460px;
+    background-color: var(--input-bg);
+    transition: background-color 0.3s ease;
+}
+
+.jwt-input-textarea,
+.jwt-input-highlight {
+    margin: 0;
+    padding: 1rem;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    line-height: 1.5;
+    letter-spacing: 0;
+    word-wrap: break-word;
+    white-space: pre-wrap;
+    overflow-wrap: break-word;
+}
+
+.jwt-input-textarea {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    resize: vertical;
+    color: transparent;
+    caret-color: var(--caret-color);
+    background: transparent;
+    z-index: 2;
+}
+
+.jwt-input-textarea::placeholder {
+    color: var(--input-placeholder);
+    opacity: 0.5;
+}
+
+.jwt-input-highlight {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    pointer-events: none;
+    z-index: 1;
+    background-color: var(--input-bg);
+}
+
+/* Decoded Output Sections */
+.decoded-output {
+    padding: 1rem;
+    margin: 0;
+    font-size: 14px;
+    border-radius: 0 0 4px 4px;
+    min-height: 80px;
+    overflow-x: auto;
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.header-bg {
+    background-color: var(--header-highlight-bg);
+}
+
+.payload-color {
+    color: #d63aff;
+    background-color: var(--payload-highlight-bg);
+}
+
+.payload-bg {
+    background-color: var(--payload-highlight-bg);
+}
+
+/* Signature Section */
+.signature-section {
+    background-color: var(--signature-highlight-bg);
+    padding: 1rem;
+    border-radius: 0 0 4px 4px;
+    transition: background-color 0.3s ease;
+}
+
+.secret-input-container {
+    margin-bottom: 0.5rem;
+}
+
+/* Secret Input Field */
+#secret-input {
+    font-size: 14px;
+    background-color: var(--input-bg) !important;
+    color: var(--input-text) !important;
+    border-color: var(--input-border) !important;
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+#secret-input:focus {
+    background-color: var(--input-bg) !important;
+    color: var(--input-text) !important;
+    border-color: #0d6efd !important;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+#secret-input::placeholder {
+    color: var(--input-placeholder) !important;
+    opacity: 0.6;
+}
+
+#secret-display {
+    color: #00b9f1;
+}
+
+/* Signature Status */
+.signature-status {
+    font-size: 14px;
+}
+
+.signature-status .alert {
+    padding: 0.75rem;
+    font-size: 14px;
+}
+
+/* Encoder-specific fields */
+#encoder-payload,
+#encoder-secret {
+    border: 0 none;
+    font-size: 14px;
+}

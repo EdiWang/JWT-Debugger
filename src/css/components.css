@@ -1,0 +1,62 @@
+/* Card Styles */
+.card {
+    background-color: var(--card-bg);
+    border-color: var(--card-border);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.card-header {
+    background-color: var(--card-header-bg);
+    border-bottom-color: var(--card-border);
+    color: var(--text-primary);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
+
+/* Form Elements */
+.form-label {
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+}
+
+.form-check-label {
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+}
+
+.form-check-input {
+    background-color: var(--input-bg);
+    border-color: var(--input-border);
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+}
+
+.form-check-input:checked {
+    background-color: #0d6efd;
+    border-color: #0d6efd;
+}
+
+.form-check-input:focus {
+    border-color: #86b7fe;
+    box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+
+/* Button Overrides for Dark Theme */
+.btn-outline-secondary {
+    color: var(--btn-outline-color) !important;
+    border-color: var(--btn-outline-color) !important;
+    background-color: transparent !important;
+    transition: all 0.3s ease;
+}
+
+.btn-outline-secondary:hover {
+    background-color: var(--btn-outline-hover-bg) !important;
+    border-color: var(--btn-outline-color) !important;
+    color: var(--btn-outline-hover-color) !important;
+}
+
+.btn-outline-secondary:focus {
+    box-shadow: 0 0 0 0.25rem rgba(108, 117, 125, 0.25);
+}
+
+[data-theme="dark"] .btn-outline-secondary:focus {
+    box-shadow: 0 0 0 0.25rem rgba(160, 160, 160, 0.25);
+}
