@@ -21,7 +21,7 @@
 </head>
 
 <body>
-    <div class="container mt-3">
+    <div class="container mt-3" x-data="jwtDebugger()">
         <h1 class="text-center site-title mb-4">JSON Web Token (JWT) Debugger</h1>
 
         <!-- Bootstrap Tabs Navigation -->
@@ -55,14 +55,19 @@
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <span>JSON Web Token (JWT)</span>
                                 <div>
-                                    <button id="copy-jwt-btn" class="btn btn-sm btn-outline-secondary me-2" type="button">Copy</button>
-                                    <button id="clear-jwt-btn" class="btn btn-sm btn-outline-secondary" type="button">Clear</button>
+                                    <button @click="copyJWT()" class="btn btn-sm btn-outline-secondary me-2" type="button">Copy</button>
+                                    <button @click="clearDecoder()" class="btn btn-sm btn-outline-secondary" type="button">Clear</button>
                                 </div>
                             </div>
                             <div class="card-body jwt-card-body">
                                 <div class="jwt-input-wrapper">
-                                    <textarea id="jwt-input" class="jwt-input-textarea code-font" placeholder="Paste your JWT here..."></textarea>
-                                    <div id="jwt-highlighted" class="jwt-input-highlight code-font"></div>
+                                    <textarea x-model="decoder.jwt"
+                                              @input="handleJWTDecode()"
+                                              @scroll="syncScroll($event)"
+                                              x-ref="jwtInput"
+                                              class="jwt-input-textarea code-font"
+                                              placeholder="Paste your JWT here..."></textarea>
+                                    <div x-html="decoder.jwtHighlighted" class="jwt-input-highlight code-font"></div>
                                 </div>
                             </div>
                         </div>
@@ -72,14 +77,13 @@
                         <!-- Header Section -->
                         <h2 class="feature-subheader small">Decoded header</h2>
                         <div class="decoded-section mb-4">
-                            <pre id="header-output" class="decoded-output code-font header-bg"></pre>
+                            <pre x-html="decoder.header" class="decoded-output code-font header-bg"></pre>
                         </div>
-
 
                         <!-- Payload Section -->
                         <h2 class="feature-subheader small">Decoded payload</h2>
                         <div class="decoded-section mb-4">
-                            <pre id="payload-output" class="decoded-output payload-bg"></pre>
+                            <pre x-html="decoder.payload" class="decoded-output payload-bg"></pre>
                         </div>
 
                         <!-- Signature Section -->
@@ -90,17 +94,26 @@
                             <div class="signature-section">
                                 <div class="secret-input-container">
                                     <label for="secret-input" class="form-label">Enter the secret used to sign the JWT</label>
-                                    <input type="text" name="secret-input" id="secret-input" class="form-control code-font"
+                                    <input type="text"
+                                           x-model="decoder.secret"
+                                           @input="verifySignature()"
+                                           name="secret-input"
+                                           id="secret-input"
+                                           class="form-control code-font"
                                            placeholder="your-256-bit-secret">
 
                                     <div class="form-check mt-2">
-                                        <input class="form-check-input" type="checkbox" id="secret-base64-encoded">
+                                        <input class="form-check-input"
+                                               type="checkbox"
+                                               x-model="decoder.secretBase64"
+                                               @change="verifySignature()"
+                                               id="secret-base64-encoded">
                                         <label class="form-check-label small" for="secret-base64-encoded">
                                             secret base64 encoded
                                         </label>
                                     </div>
                                 </div>
-                                <div id="signature-status" class="signature-status mt-3"></div>
+                                <div x-html="decoder.signatureStatus" class="signature-status mt-3"></div>
                             </div>
                         </div>
                     </div>
@@ -122,8 +135,11 @@
                             <div class="card-body">
                                 <div class="mb-3">
                                     <label for="encoder-algorithm" class="form-label">Algorithm</label>
-                                    <select id="encoder-algorithm" class="form-select code-font">
-                                        <option value="HS256" selected>HS256</option>
+                                    <select x-model="encoder.algorithm"
+                                            @change="handleJWTEncode()"
+                                            id="encoder-algorithm"
+                                            class="form-select code-font">
+                                        <option value="HS256">HS256</option>
                                         <option value="HS384">HS384</option>
                                         <option value="HS512">HS512</option>
                                     </select>
@@ -135,13 +151,20 @@
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <span>Payload: Data</span>
                                 <div>
-                                    <button id="clear-encoder-payload-btn" class="btn btn-sm btn-outline-secondary" type="button">Clear</button>
+                                    <button @click="clearEncoderPayload()" class="btn btn-sm btn-outline-secondary" type="button">Clear</button>
                                 </div>
                             </div>
                             <div class="card-body">
                                 <div class="json-editor-wrapper">
-                                    <textarea id="encoder-payload" class="json-editor-textarea code-font" rows="10" spellcheck="false"></textarea>
-                                    <div id="encoder-payload-highlighted" class="json-editor-highlight code-font"></div>
+                                    <textarea x-model="encoder.payload"
+                                              @input="handleJWTEncode()"
+                                              @scroll="syncScrollPayload($event)"
+                                              x-ref="encoderPayload"
+                                              id="encoder-payload"
+                                              class="json-editor-textarea code-font"
+                                              rows="10"
+                                              spellcheck="false"></textarea>
+                                    <div x-html="encoder.payloadHighlighted" class="json-editor-highlight code-font"></div>
                                 </div>
                                 <div class="form-text small">Enter valid JSON payload data</div>
                             </div>
@@ -151,13 +174,22 @@
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <span>Sign JWT: Secret</span>
                                 <div>
-                                    <button id="clear-encoder-secret-btn" class="btn btn-sm btn-outline-secondary" type="button">Clear</button>
+                                    <button @click="clearEncoderSecret()" class="btn btn-sm btn-outline-secondary" type="button">Clear</button>
                                 </div>
                             </div>
                             <div class="card-body">
-                                <input type="text" id="encoder-secret" class="form-control code-font" placeholder="your-256-bit-secret">
+                                <input type="text"
+                                       x-model="encoder.secret"
+                                       @input="handleJWTEncode()"
+                                       id="encoder-secret"
+                                       class="form-control code-font"
+                                       placeholder="your-256-bit-secret">
                                 <div class="form-check mt-2">
-                                    <input class="form-check-input" type="checkbox" id="encoder-secret-base64">
+                                    <input class="form-check-input"
+                                           type="checkbox"
+                                           x-model="encoder.secretBase64"
+                                           @change="handleJWTEncode()"
+                                           id="encoder-secret-base64">
                                     <label class="form-check-label small" for="encoder-secret-base64">
                                         secret base64 encoded
                                     </label>
@@ -170,13 +202,19 @@
                             <div class="card-header d-flex justify-content-between align-items-center">
                                 <span>JSON Web Token</span>
                                 <div>
-                                    <button id="copy-generated-jwt-btn" class="btn btn-sm btn-outline-secondary" type="button">Copy</button>
+                                    <button @click="copyGeneratedJWT()" class="btn btn-sm btn-outline-secondary" type="button">Copy</button>
                                 </div>
                             </div>
                             <div class="card-body jwt-card-body">
                                 <div class="jwt-input-wrapper">
-                                    <textarea id="generated-jwt-output" class="jwt-input-textarea code-font" readonly placeholder="Your generated JWT will appear here..."></textarea>
-                                    <div id="generated-jwt-highlighted" class="jwt-input-highlight code-font"></div>
+                                    <textarea x-model="encoder.generatedJWT"
+                                              @scroll="syncScrollGenerated($event)"
+                                              x-ref="generatedJWT"
+                                              id="generated-jwt-output"
+                                              class="jwt-input-textarea code-font"
+                                              readonly
+                                              placeholder="Your generated JWT will appear here..."></textarea>
+                                    <div x-html="encoder.generatedJWTHighlighted" class="jwt-input-highlight code-font"></div>
                                 </div>
                             </div>
                         </div>
@@ -196,7 +234,8 @@
     </button>
 
     <script type="module" src="js/theme.mjs"></script>
-    <script type="module" src="js/app.mjs"></script>
+    <script type="module" src="js/alpine-app.mjs"></script>
+    <script defer src="/lib/alpinejs/3.15.0/cdn.min.js"></script>
 </body>
 
 </html>
