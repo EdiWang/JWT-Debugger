@@ -6,6 +6,8 @@ The JWT Debugger is a web application designed to decode, validate, and generate
 
 Demo: https://jwt.edi.wang
 
+[![JWT Debugger Screenshot](./.assets/jwt-debugger.png)](https://jwt.edi.wang)
+
 ## Features
 
 ### JWT Decoder
